@@ -12,7 +12,7 @@ namespace Softodon
         {
             var softodon = new Softodon("friends.nico");
             softodon.CreateAppAndAuth();
-            softodon.SubscribeLocalTimeline(x => Console.WriteLine($"{x.Account.FullUserName} tooted \"{x.Content}\""));
+            softodon.SpeechLocalTimeline();
             Console.WriteLine("Press any key to stop");
             Console.ReadKey();
             softodon.Dispose();

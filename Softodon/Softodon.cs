@@ -28,18 +28,19 @@ namespace Softodon
         {
             var app = ApplicaionManager.RegistApp(Host, AppName, Scope.Read).Result;
             var url = ApplicaionManager.GetOAuthUrl(app);
-            Console.WriteLine(url);
+            Console.WriteLine("open " + url);
+            System.Diagnostics.Process.Start(url);
             var code = Console.ReadLine();
             Tokens = ApplicaionManager.GetAccessTokenByCode(app, code).Result;
             Console.WriteLine(Tokens.AccessToken);
         }
 
-        public void SubscribeLocalTimeline(Action<Status> onToot)
+        public void SpeechLocalTimeline()
         {
             var client = new MastodonClient(Host, Tokens.AccessToken);
             Subscriber = client.GetObservableCustomTimeline("public/local")
                          .OfType<Status>()
-                         .Subscribe(onToot);
+                         .Subscribe(x => Console.WriteLine($"{x.Account.FullUserName} tooted \"{x.Content}\""));
         }
 
         public void Dispose()
