@@ -8,14 +8,23 @@ namespace Softodon
 {
     class Program
     {
+        private static Softodon Softodon = new Softodon("friends.nico");
+
         static void Main(string[] args)
         {
-            var softodon = new Softodon("friends.nico");
-            softodon.CreateAppAndAuth();
-            softodon.SpeechLocalTimeline();
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(cancelEventHandler);
+
+            Softodon.CreateAppAndAuth();
+            Softodon.SpeechLocalTimeline();
             Console.WriteLine("Press any key to stop");
             Console.ReadKey();
-            softodon.Dispose();
+            Softodon.Dispose();
+        }
+
+        protected static void cancelEventHandler(object sender, ConsoleCancelEventArgs args)
+        {
+            Softodon.Dispose();
+            Environment.Exit(0);
         }
     }
 }

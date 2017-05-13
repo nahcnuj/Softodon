@@ -17,6 +17,8 @@ namespace Softodon
         private string AppName;
         private TokenInfo Tokens;
         private IDisposable Subscriber;
+        
+        private const string SoftalkExePath = @"C:\softalk\softalk.exe";
 
         public Softodon(string host, string appName = "Softodon")
         {
@@ -39,14 +41,22 @@ namespace Softodon
         public void SpeechLocalTimeline()
         {
             var client = new MastodonClient(Host, Tokens.AccessToken);
+            System.Diagnostics.Process.Start(SoftalkExePath, $"/X:1");
             Subscriber = client.GetObservableCustomTimeline("public/local")
                          .OfType<Status>()
-                         .Subscribe(x => Console.WriteLine($"{x.Account.FullUserName} tooted \"{x.Content}\""));
+                         .Subscribe(x => {
+                             Console.WriteLine($"{x.Account.FullUserName} tooted \"{x.Content}\"");
+                             System.Diagnostics.Process.Start(SoftalkExePath, $"/W:{x.Content}").WaitForExit();
+                         });
         }
 
         public void Dispose()
         {
-            Subscriber.Dispose();
+            System.Diagnostics.Process.Start(SoftalkExePath, "/close2_now");
+            if (Subscriber != null)
+            {
+                Subscriber.Dispose();
+            }
         }
     }
 }
