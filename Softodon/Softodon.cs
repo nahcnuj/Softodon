@@ -28,11 +28,12 @@ namespace Softodon
         {
             var app = ApplicaionManager.RegistApp(Host, AppName, Scope.Read).Result;
             var url = ApplicaionManager.GetOAuthUrl(app);
-            Console.WriteLine("open " + url);
+            Console.WriteLine("Open " + url);
             System.Diagnostics.Process.Start(url);
+            Console.WriteLine("Please accept the request to access your account on opened web browser.");
+            Console.Write("And copy and paste the displayed code here: ");
             var code = Console.ReadLine();
             Tokens = ApplicaionManager.GetAccessTokenByCode(app, code).Result;
-            Console.WriteLine(Tokens.AccessToken);
         }
 
         public void SpeechLocalTimeline()
