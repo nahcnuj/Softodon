@@ -45,8 +45,10 @@ namespace Softodon
             Subscriber = client.GetObservableCustomTimeline("public/local")
                          .OfType<Status>()
                          .Subscribe(x => {
-                             Console.WriteLine($"{x.Account.FullUserName} tooted \"{x.Content}\"");
-                             System.Diagnostics.Process.Start(SoftalkExePath, $"/W:{x.Content}").WaitForExit();
+                             String content = ArrangeForSpeech(x.Content);
+                             
+                             Console.WriteLine($"{x.Account.FullUserName} tooted \"{content}\" (original: {x.Content})");
+                             System.Diagnostics.Process.Start(SoftalkExePath, $"/W:{content}").WaitForExit();
                          });
         }
 
@@ -57,6 +59,12 @@ namespace Softodon
             {
                 Subscriber.Dispose();
             }
+        }
+
+        private string ArrangeForSpeech(string original)
+        {
+            var arranged = System.Text.RegularExpressions.Regex.Replace(original, @"<.*?>", "");
+            return arranged;
         }
     }
 }
