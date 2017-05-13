@@ -32,8 +32,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mastodot, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mastodot.1.1.0\lib\netstandard1.1\Mastodot.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,9 +65,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Softodon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
